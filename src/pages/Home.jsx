@@ -1,13 +1,34 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import Item from "../components/Item";
+import Products from "../data/burger";
 
 const Home = () => {
-  return (
-    <div>
-        <h1 className='text-primary text-center p-5 mt-3 bg-light'> Burger Cho - Our Goal is Your Satisfaction!</h1>
-        <h3 className='text-center bg-light p-5'>Please, go to <Link to="/products" className='text-primary'>Product List</Link> for order.</h3>
-    </div>
-  )
-}
+	let randomNumber = Math.floor(Math.random() * Products.length);
 
-export default Home
+	return (
+		<div className="bg-light p-5 mt-5 d-flex flex-column justify-content-center align-items-center shadow">
+			<h1 className="text-primary text-center pt-1"> Burger Cho - Our Goal is Your Satisfaction!</h1>
+			<div class="ratio ratio-16x9">
+				<iframe className="p-5" src="https://www.youtube.com/embed/f4nDHDMAKaE" title="YouTube video" allowfullscreen></iframe>
+			</div>
+			<h3 className="text-primary text-center pb-3">
+				Burger of the day: <span className="text-warning">{Products[randomNumber].title}</span>
+			</h3>
+			<div className="row w-50">
+				<div className="col-12">
+					<Item img={Products[randomNumber].img} title={Products[randomNumber].title} price={Products[randomNumber].price} addProduct={Products[randomNumber]} />;
+				</div>
+			</div>
+			<h5 className="text-center">
+				Please, go to{" "}
+				<Link to="/Products" className="text-primary">
+					Product List
+				</Link>{" "}
+				for order.
+			</h5>
+		</div>
+	);
+};
+
+export default Home;

@@ -7,7 +7,7 @@ const Home = () => {
 	let randomNumber = Math.floor(Math.random() * Products.length);
 
 	return (
-		<div className="bg-light p-5 mt-5 d-flex flex-column justify-content-center align-items-center shadow">
+		<div className="bg-light p-5 my-5 d-flex flex-column justify-content-center align-items-center shadow">
 			<h1 className="text-primary text-center pt-1"> Burger Cho - Our Goal is Your Satisfaction!</h1>
 			<div class="ratio ratio-16x9">
 				<iframe className="p-5" src="https://www.youtube.com/embed/f4nDHDMAKaE" title="YouTube video" allowfullscreen></iframe>
@@ -17,10 +17,10 @@ const Home = () => {
 			</h3>
 			<div className="row w-50">
 				<div className="col-12">
-					<Item img={Products[randomNumber].img} title={Products[randomNumber].title} price={Products[randomNumber].price} addProduct={Products[randomNumber]} />;
+					<Item img={Products[randomNumber].img} title={Products[randomNumber].title} price={Products[randomNumber].price} addProduct={Products[randomNumber]} />
 				</div>
 			</div>
-			<h5 className="text-center">
+			<h5 className="text-center mt-3">
 				Please, go to{" "}
 				<Link to="/Products" className="text-primary">
 					Product List

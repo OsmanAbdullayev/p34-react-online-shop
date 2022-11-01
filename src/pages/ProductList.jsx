@@ -12,13 +12,13 @@ const ProductList = (props) => {
 				{Products.filter((product) => product.title.toLowerCase().includes(props.keyword.toLowerCase())).map((fd, i) => {
 					return (
 						<div className="col-12 col-md-6 col-lg-3">
-							<Item key={i} img={fd.img} title={fd.title} price={fd.price} addProduct={fd} />;
+							<Item key={i} img={fd.img} title={fd.title} price={fd.price} addProduct={fd} />
 						</div>
 					);
 				})}
 			</div>
 		</>
-	);
+	)
 };
 
 export default ProductList;

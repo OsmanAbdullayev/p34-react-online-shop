@@ -18,7 +18,7 @@ const Navbar = (props) => {
 					<span className="navbar-toggler-icon" />
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+					<ul className="navbar-nav me-auto my-2 mb-lg-0">
 						<li className="nav-item mx-2">
 							<NavLink className="fw-bolder nav-link fs-5 px-3" aria-current="page" to="/" end>
 								Home
@@ -30,11 +30,11 @@ const Navbar = (props) => {
 							</NavLink>
 						</li>
 					</ul>
-					<Link className="btn btn-primary text-light me-3 mb-3 mb-lg-0" to="/cart">
+					<Link className="btn btn-primary text-light ms-4 mb-3 mb-lg-0" to="/cart">
 						Cart ({totalItems})
 					</Link>
 
-					<form className="d-flex" role="search" onSubmit={props.submitFunction}>
+					<form className="d-flex ms-4" role="search" onSubmit={props.submitFunction}>
 						<input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={props.changeFunction} />
 						<Link to="/products" className="btn btn-primary text-light" type="button">
 							Search

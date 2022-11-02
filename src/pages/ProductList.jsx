@@ -8,7 +8,7 @@ const ProductList = (props) => {
 	return (
 		<>
 			<h1 className="text-primary text-center p-3">Please, make your order.</h1>
-			<div className="row mx-3 g-3">
+			<div className="row g-3">
 				{Products.filter((product) => product.title.toLowerCase().includes(props.keyword.toLowerCase())).map((fd, i) => {
 					return (
 						<div className="col-12 col-md-6 col-lg-3">

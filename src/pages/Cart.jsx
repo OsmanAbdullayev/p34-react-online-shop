@@ -3,9 +3,13 @@ import { useCart } from "react-use-cart";
 import { NavLink } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
-	const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } = useCart();
+	const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem, emptyCart, totalItems, cartTotal } = useCart();
+	const removed = () => toast("Item removed successfully!");
+	const checkedOut = () => toast("Checking out...");
 
 	const removeAllItems = () => {
 		confirmAlert({
@@ -13,16 +17,12 @@ const Cart = () => {
 			message: "All items will be removed.",
 			buttons: [
 				{
-				
 					label: "Yes",
 					onClick: () => {
-						for (const item of items) {
-							removeItem(item.id);
-						}
+						emptyCart();
 					},
 				},
 				{
-					
 					label: "No",
 				},
 			],
@@ -33,67 +33,98 @@ const Cart = () => {
 		return (
 			<h2 className="text-primary text-center p-5 mt-3">
 				{" "}
-				Your cart is empty. Please, visit <NavLink to="/products" className="text-secondary">Product List</NavLink> to choose products.
+				Your cart is empty. Please, visit{" "}
+				<NavLink to="/products" className="text-secondary">
+					Product List
+				</NavLink>{" "}
+				to choose products.
 			</h2>
 		);
 	return (
 		<div>
-			<section className="d-flex justify-content-center align-items-center p-5">
-				<h1 className="text-primary text-center ">Total Unique Burgers: {totalUniqueItems}</h1>
+			<section className="d-flex justify-content-center align-items-center mt-3 p-3">
+				<h2 className="text-primary text-center m-0">Total Unique Burgers: {totalUniqueItems}</h2>
 				<button type="button" className="fs-5 btn btn-danger text-light mx-4" onClick={removeAllItems}>
 					Remove All Items
 				</button>
 			</section>
-			<table className="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Product</th>
-						<th scope="col">Price</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					{items.map((fd, i) => (
-						<tr className="align-middle">
-							<th scope="row" className="align-middle">{i + 1}</th>
+			<div className="table-responsive-sm">
+				<table className="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Product Photo</th>
+							<th scope="col">Product Name</th>
+							<th scope="col">Price</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{items.map((fd, i) => (
+							<tr className="align-middle">
+								<th scope="row" className="align-middle">
+									{i + 1}
+								</th>
+								<td>
+									<img src={fd.img} alt="error" className="shadow"></img>
+								</td>
+								<td>
+									<h3 className="text-primary">{fd.title}</h3>
+								</td>
+								<td className="align-middle">
+									<h5>${fd.price * fd.quantity}</h5>
+								</td>
+								<td className="align-middle">
+									<h5>x{fd.quantity}</h5>
+								</td>
+								<td className="align-middle">
+									<tr>
+										<button className="fs-5 btn btn-primary text-light" onClick={() => updateItemQuantity(fd.id, fd.quantity - 1)}>
+											-
+										</button>
+									</tr>
+									<tr>
+										<button className="fs-5 my-1 btn btn-primary text-light" onClick={() => updateItemQuantity(fd.id, fd.quantity + 1)}>
+											+
+										</button>
+									</tr>
+									<tr>
+										<button
+											type="button"
+											className="fs-5 btn btn-danger text-light"
+											onClick={() => {
+												removed();
+												removeItem(fd.id);
+											}}>
+											Remove
+										</button>
+										<ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+									</tr>
+								</td>
+							</tr>
+						))}
+						<tr>
+							<th>Total</th>
+							<td></td>
+							<td></td>
 							<td>
-								<img src={fd.img} alt="error" className="w-25 shadow"></img>
-								<h3 className="text-primary p-2">{fd.title}</h3>
+								<h3 className="text-danger">${cartTotal} </h3>
 							</td>
-							<td className="align-middle">
-								<h1>${fd.price}</h1>
+							<td>
+								<h3 className="text-danger">x{totalItems} </h3>
 							</td>
-							<td className="align-middle">
-								<h1>x{fd.quantity}</h1>
-							</td>
-							<td className="align-middle">
-								<tr>
-									<button className="fs-5 btn btn-primary text-light w-100" onClick={() => updateItemQuantity(fd.id, fd.quantity - 1)}>
-										-
-									</button>
-								</tr>
-								<tr>
-									<button className="fs-5 my-1 btn btn-primary text-light w-100" onClick={() => updateItemQuantity(fd.id, fd.quantity + 1)}>
-										+
-									</button>
-								</tr>
-								<tr>
-									<button
-										type="button"
-										className="fs-5 btn btn-danger text-light w-100"
-										onClick={() => {
-											removeItem(fd.id);
-										}}>
-										Remove
-									</button>
-								</tr>
+							<td className="py-3">
+								<button type="button" className="fs-5 btn btn-success text-light" onClick={checkedOut}>
+									Checkout
+								</button>
+								<ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+
 							</td>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };

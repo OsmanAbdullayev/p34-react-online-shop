@@ -15,8 +15,10 @@ const Home = () => {
 			<h3 className="text-primary text-center pb-3">
 				Burger of the day: <span className="text-warning">{Products[randomNumber].title}</span>
 			</h3>
-			<div className="row w-50">
-				<div className="col-12">
+
+
+			<div className="row">
+				<div className="col">
 					<Item img={Products[randomNumber].img} title={Products[randomNumber].title} price={Products[randomNumber].price} addProduct={Products[randomNumber]} />
 				</div>
 			</div>

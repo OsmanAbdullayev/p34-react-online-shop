@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "react-use-cart";
 import Navbar from "../components/Navbar.jsx";
 import Home from "../pages/Home";
